@@ -49,5 +49,17 @@ switch (color){
 * Si no alcanza, imprime "Saldo insuficiente" y detén el programa saliendo del bucle.
 * */
 console.log("\n")
-const saldo =1000;
-let intentos =3;
+let saldo =1000;
+let retiros=[200,300,600]
+
+for (let i=0;i<retiros.length;i++){
+    if (retiros[i]<=saldo){
+        saldo=saldo-retiros[i]
+        console.log("se retiro: ",retiros[i], " te quedan: ",saldo);
+    }else{
+        console.log("no tienes fondos suficientes para realizar este retiro: ",retiros[i]);
+        break;
+        
+    }
+}
+

@@ -66,6 +66,9 @@ console.log("\n\n"
  *      sea menor de 20€.
  *
  * */
+
+console.log("ejercicio de carrito");
+
 const carrito = [
      { nombre: "Camiseta",   precio: 19.99, cantidad: 3 },
      { nombre: "Pantalón",   precio: 49.99, cantidad: 1 },
@@ -73,22 +76,33 @@ const carrito = [
      { nombre: "Calcetines", precio: 4.99,  cantidad: 5 },
      { nombre: "Gorra",      precio: 14.99, cantidad: 1 },
    ];
-    const carrito2 = carrito.map(total=>{
-        return{
-            nombre:total.nombre,
-            precio:total.precio,
-            cantidad:total.cantidad,
-            total:total.precio*total.cantidad
-        }
+
+const carritoNew =carrito.map(producto=>{
+    return {
+        ...producto,
+        total:(producto.precio * producto.cantidad).toFixed(2),
     }
-        
-    ) 
-    separar();
-    
-    console.log(carrito2)
+})
 
-    
+const carritoReduce=carrito.reduce((acumulador,item)=>{
+    return acumulador + (item.cantidad * item.precio);
+},0);
 
+const carritoFilter = carrito.filter(producto =>{
+    if (producto.precio>20){
+        return producto
+    }
+})
+
+console.log(carritoNew)
+console.log("\n");
+console.log(carritoReduce)
+console.log("\n");
+console.log(carritoFilter)
+
+
+console.log("\n");    
+console.log("ejercicio 3");
 /*
  * 3. Tienes el siguiente array con los jugadores de un equipo de fútbol:
  *
@@ -107,13 +121,13 @@ const jugadores = [
   { nombre: "Mbappe",     goles: 28,  posicion: "Delantero" },
   { nombre: "Lamine",    goles: 4,  posicion: "Centrocampista" },
 ];
-const jugadoresDelantero = jugadores.filter(jugador=>jugador.posicion==="Delantero")
 
-const totalGoles =jugadores.reduce((acumulador,goltotal)=>{
-    return acumulador+goltotal.goles;
+const jugadoresDelantero = jugadores.filter(jugador=>{return jugador.posicion=="Delantero"})
+const totalGoles =jugadores.reduce((acumulador,gol)=>{
+    return acumulador + gol.goles
 },0)
 
-const goles = jugadores.map(jugador=> {
+const goles =jugadores.map(jugador=>{
     return `${jugador.nombre} - ${jugador.goles} goles`
 })
 
@@ -123,23 +137,12 @@ separar();
 console.log(totalGoles)
 separar();
 console.log(goles);
+console.log("\n");    
 
 
-
-
-
+console.log("ejercicio 4");
 /*
  * 4. Tienes el siguiente array con las calificaciones de varios alumnos:
- *
- *    const alumnos = [
- *      { nombre: "Ana",    nota: 8.5 },
- *      { nombre: "Carlos", nota: 4.2 },
- *      { nombre: "Lucía",  nota: 6.0 },
- *      { nombre: "Pedro",  nota: 3.8 },
- *      { nombre: "Sara",   nota: 9.1 },
- *      { nombre: "Diego",  nota: 5.0 },
- *    ];
- *
  *    - Usa filter para obtener solo los alumnos aprobados (nota >= 5).
  *    - Usa map para añadir a cada alumno una propiedad "estado" con el
  *      valor "Aprobado" o "Suspenso" según su nota.
@@ -148,20 +151,43 @@ console.log(goles);
  *      "Ana → 8.50 (APROBADO)" si aprobó o "Carlos → 4.20 (SUSPENSO)" si suspendió.
  *
  * */
+const alumnos = [
+  { nombre: "Ana",    nota: 8.5 },
+  { nombre: "Carlos", nota: 4.2 },
+  { nombre: "Lucía",  nota: 6.0 },
+  { nombre: "Pedro",  nota: 3.8 },
+  { nombre: "Sara",   nota: 9.1 },
+  { nombre: "Diego",  nota: 5.0 },
+];
 
+const aprobados=alumnos.filter(alumno=>{return alumno.nota>=5})
 
+const etsado=alumnos.map(alumno=>{return alumno.nota>=5? `${alumno.nombre} - aprobado`:`${alumno.nombre} - suspenso`})
+
+const reduce =alumnos.reduce((acumulador, alumno)=>{
+     return acumulador + alumno.nota;
+},0);
+const media =(reduce/alumnos.length).toFixed(2)
+
+console.log(aprobados);
+console.log("\n");
+console.log(etsado);
+console.log("\n");  
+console.log(media);
+console.log("\n");   
+
+alumnos.forEach(alumno=>{
+    if(alumno.nota>=5){
+        console.log(alumno.nombre ," → " , alumno.nota , "(aprobado)")
+    }else{
+        console.log(alumno.nombre ," → " , alumno.nota , "(suspenso)")
+    }
+})
+
+console.log("\n");    
+console.log("ejercicio 5");
 /*
  * 5. Tienes el siguiente array con las ventas mensuales de una empresa:
- *
- *    const ventas = [
- *      { mes: "Enero",      importe: 12500 },
- *      { mes: "Febrero",    importe: 9800  },
- *      { mes: "Marzo",      importe: 15200 },
- *      { mes: "Abril",      importe: 7300  },
- *      { mes: "Mayo",       importe: 18900 },
- *      { mes: "Junio",      importe: 11400 },
- *    ];
- *
  *    - Usa reduce para calcular el total de ventas del semestre.
  *    - Usa filter para obtener los meses en los que las ventas
  *      superaron los 12.000€.
@@ -171,21 +197,48 @@ console.log(goles);
  *      "Enero: 12.500€".
  *
  * */
+
+const ventas = [
+  { mes: "Enero",      importe: 12500 },
+  { mes: "Febrero",    importe: 9800  },
+  { mes: "Marzo",      importe: 15200 },
+  { mes: "Abril",      importe: 7300  },
+  { mes: "Mayo",       importe: 18900 },
+  { mes: "Junio",      importe: 11400 },
+];
+
+const totalVentas = ventas.reduce((acumulador,item)=>{
+    return acumulador+item.importe
+},0)
+const superaron = ventas.filter(item=>{return item.importe>=12000})
+const NewVentas=ventas.map(item=>{
+    return{
+        mes:item.mes,
+        importe:item.importe * 1.05,
+    }
+})
+
+
+console.log(totalVentas);
+separar()
+console.log(superaron);
+separar()
+console.log(NewVentas);
+
+ventas.forEach(item=>{
+    console.log(item.mes,": ",item.importe,"");
+    
+})
+
+
 // ============================================================
 //  EJERCICIOS — (forEach, map, filter, reduce, find, some, every, with, reverse, toString)
 // ============================================================
 
-
+console.log("\n");    
+console.log("ejercicio 6");
 /*
  * 6. Gestión de una playlist de música
- *
- *    const playlist = [
- *      { titulo: "Bohemian Rhapsody", artista: "Queen",      duracion: 354, reproducciones: 1200 },
- *      { titulo: "Blinding Lights",   artista: "The Weeknd", duracion: 200, reproducciones: 980  },
- *      { titulo: "Shape of You",      artista: "Ed Sheeran", duracion: 234, reproducciones: 1500 },
- *      { titulo: "Hotel California",  artista: "Eagles",     duracion: 391, reproducciones: 870  },
- *      { titulo: "Levitating",        artista: "Dua Lipa",   duracion: 203, reproducciones: 620  },
- *      { titulo: "Smells Like Teen",  artista: "Nirvana",    duracion: 301, reproducciones: 1100 },
  *    ];
  *
  *    - Usa forEach para mostrar cada canción: "Queen — Bohemian Rhapsody".
@@ -202,6 +255,40 @@ console.log(goles);
  *      Pista: primero extrae los títulos con map.
  *
  * */
+
+const playlist = [
+  { titulo: "Bohemian Rhapsody", artista: "Queen",      duracion: 354, reproducciones: 1200 },
+  { titulo: "Blinding Lights",   artista: "The Weeknd", duracion: 200, reproducciones: 980  },
+  { titulo: "Shape of You",      artista: "Ed Sheeran", duracion: 234, reproducciones: 1500 },
+  { titulo: "Hotel California",  artista: "Eagles",     duracion: 391, reproducciones: 870  },
+  { titulo: "Levitating",        artista: "Dua Lipa",   duracion: 203, reproducciones: 620  },
+  { titulo: "Smells Like Teen",  artista: "Nirvana",    duracion: 301, reproducciones: 1100 },
+];
+
+
+playlist.forEach(item=>{
+    console.log(item.artista, " - ", item.titulo);
+})
+const playFilter=playlist.filter(item=>{return item.reproducciones>=1000})
+const mayuscula = playlist.map(item=>{
+    return{
+        titulo:item.titulo.toLocaleUpperCase(),
+        reproducciones:(item.reproducciones*1.10).toFixed(0)
+    }
+})
+const duraciontotal=playlist.reduce((acumulador,item)=>{
+    return acumulador + item.duracion
+},0)
+
+separar()
+console.log(playFilter);
+separar()
+console.log("ejercicio 7");
+separar()
+console.log(mayuscula);
+separar()
+console.log(duraciontotal);
+
 
 
 /*
