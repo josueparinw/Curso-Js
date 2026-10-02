@@ -6,7 +6,7 @@
 *  - FILTER
 *  - REDUCE
 *
-* */
+*/
 
 
 const separar =()=>{
@@ -32,7 +32,7 @@ console.log("\n\n"
  *    - Usa forEach para mostrar por consola cada temperatura en Celsius
  *      con el mensaje: "Día X: 22°C" (donde X es el número del día, empezando en 1).
  *
- * */
+ */
     const temperaturas = [22, 35, 18, 40, 28, 15, 33];
     const Fahrenheit =temperaturas.map(function(grados){
         return (grados*9/5)+32
@@ -65,7 +65,7 @@ console.log("\n\n"
  *    - Usa filter para obtener solo los productos cuyo precio unitario
  *      sea menor de 20€.
  *
- * */
+ */
 
 console.log("ejercicio de carrito");
 
@@ -150,7 +150,7 @@ console.log("ejercicio 4");
  *    - Usa forEach para mostrar por consola el resultado de cada alumno:
  *      "Ana → 8.50 (APROBADO)" si aprobó o "Carlos → 4.20 (SUSPENSO)" si suspendió.
  *
- * */
+ */
 const alumnos = [
   { nombre: "Ana",    nota: 8.5 },
   { nombre: "Carlos", nota: 4.2 },
@@ -219,6 +219,9 @@ const NewVentas=ventas.map(item=>{
 })
 
 
+
+
+
 console.log(totalVentas);
 separar()
 console.log(superaron);
@@ -267,7 +270,7 @@ const playlist = [
 
 
 playlist.forEach(item=>{
-    console.log(item.artista, " - ", item.titulo);
+    console.log(item.artista, item.titulo);
 })
 const playFilter=playlist.filter(item=>{return item.reproducciones>=1000})
 const mayuscula = playlist.map(item=>{
@@ -280,14 +283,23 @@ const duraciontotal=playlist.reduce((acumulador,item)=>{
     return acumulador + item.duracion
 },0)
 
+const siexiste = playlist.find(item=>{return item.duracion>=300})
+
+const solouna =playlist.some(item=>{return item.reproducciones>=1400})
+const todos =playlist.every(item=>{return item.reproducciones>=500})
+
 separar()
 console.log(playFilter);
-separar()
-console.log("ejercicio 7");
 separar()
 console.log(mayuscula);
 separar()
 console.log(duraciontotal);
+separar()
+console.log(siexiste);
+separar()
+console.log(solouna);
+separar()
+console.log(todos);
 
 
 
