@@ -1,0 +1,79 @@
+/*
+* 
+* 1. Calculadora
+* 
+* Crea una calculadora que recuerde el resultado en memoria. Debe de tener los métodos suma(), resta(), resultado().
+* 
+* */
+
+
+
+function calculadora(n1,n2){
+    this.numero_1=n1;
+    this.numero_2=n2;
+    this.resultad;
+}
+calculadora.prototype.sumar=function(){
+    this.resultad = this.numero_1 + this.numero_2;
+}
+calculadora.prototype.resta=function(){
+    this.resultad =this.numero_1 - this.numero_2;
+}
+calculadora.prototype.resultado=function(){
+    console.log(this.resultad);
+}
+const calculadora1=new calculadora(1,2);
+calculadora1.sumar();
+calculadora1.resultado();
+
+const calculadora2=new calculadora(5,1);
+calculadora2.resta();
+calculadora2.resultado();
+
+/*
+*
+* 2. Sistema de Login
+*
+* Crea un sistema que permita hasta 3 intentos. Si se superan, bloquea la cuenta. Crea los atributos/variables y
+* funciones que consideres que son necesarias para desarrollar este ejercicio.
+*
+* */
+
+
+function login (){
+    this.usuario="123";
+    this.contraseña="123";
+    this.intentos=3;
+    this.correcto=false;
+    this.bloqueado=""
+}
+login.prototype.identificar=function(){
+    while((this.intentos>0)&&(!this.correcto)&&(this.bloqueado!==this.usuario)){
+        let usuario=prompt("cual es tu usuario");
+        let contraseña = prompt("cual es tu contraseña");
+
+        if((this.usuario==usuario)&&(this.contraseña==contraseña)){
+            alert("acediste")
+            this.correcto=true;
+        }else{
+            this.intentos-=1;
+            alert("datos incorrectos te quedan "+ this.intentos + " intentos")
+            
+        }
+    }
+    
+    
+    if(this.correcto){
+        alert("bienvenido")
+    }else if(this.bloqueado!==this.usuario){
+        alert("agotaste tus intentos")
+        this.bloqueado=this.usuario;
+    }
+    if(this.bloqueado===this.usuario){alert("FUISTE BLOQUEADO CONTACTA CON EL ADMINISTRADOR")}
+    
+}
+
+
+const Login=new login();
+Login.identificar();
+
